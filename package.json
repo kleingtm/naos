@@ -6,14 +6,14 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack --env.tnsAction build",
-    "build:android": "npm run build -- --env.android",
-    "build:ios": "npm run build -- --env.ios",
+    "build:android": "yarn build --env.android",
+    "build:ios": "yarn build --env.ios",
     "debug": "webpack --watch --env.tnsAction debug",
-    "debug:android": "npm run debug -- --env.android",
-    "debug:ios": "npm run debug -- --env.ios",
+    "debug:android": "yarn debug --env.android",
+    "debug:ios": "yarn debug --env.ios",
     "watch": "webpack --watch --env.tnsAction run",
-    "watch:android": "npm run watch -- --env.android",
-    "watch:ios": "npm run watch -- --env.ios",
+    "watch:android": "yarn watch --env.android",
+    "watch:ios": "yarn watch --env.ios",
     "clean": "rimraf dist"
   },
   "dependencies": {
