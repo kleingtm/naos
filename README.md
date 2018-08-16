@@ -6,22 +6,22 @@
 
 ``` bash
 # Install dependencies
-npm install
+yarn
 
 # Build for production
-npm run build
-npm run build:<platform>
+yarn build
+yarn build:<platform>
 
 # Build, watch for changes and debug the application
-npm run debug
-npm run debug:<platform>
+yarn debug
+yarn debug:<platform>
 
 # Build, watch for changes and run the application
-npm run watch
-npm run watch:<platform>
+yarn watch
+yarn watch:<platform>
 
 # Clean the NativeScript application instance (i.e. rm -rf dist)
-npm run clean
+yarn clean
 ```
 
 > When invoking the various npm scripts, omitting the platform will attempt to launch `tns` for both platforms, which will only work in a properly configured OSX environment.
