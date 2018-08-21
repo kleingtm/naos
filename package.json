@@ -1,51 +1,63 @@
 {
-  "name": "ts-vue-app",
-  "version": "0.1.0",
-  "private": true,
-  "nativescript": {
-    "id": "org.nativescript.TsApp",
-    "tns-android": {
-      "version": "4.2.0"
-    },
-    "tns-ios": {
-      "version": "4.2.0"
-    }
-  },
-  "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
-    "test:unit": "vue-cli-service test:unit",
-    "test:e2e": "vue-cli-service test:e2e"
-  },
-  "dependencies": {
-    "nativescript-theme-core": "~1.0.4",
-    "tns-core-modules": "~4.2.0",
-    "vue": "^2.5.17",
-    "vue-class-component": "^6.0.0",
-    "vue-property-decorator": "^7.0.0",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
-  },
-  "devDependencies": {
-    "@types/jest": "^23.1.4",
-    "@vue/cli-plugin-babel": "^3.0.0",
-    "@vue/cli-plugin-e2e-nightwatch": "^3.0.0",
-    "@vue/cli-plugin-typescript": "^3.0.0",
-    "@vue/cli-plugin-unit-jest": "^3.0.0",
-    "@vue/cli-service": "^3.0.0",
-    "@vue/test-utils": "^1.0.0-beta.20",
-    "babel-core": "7.0.0-bridge.0",
-    "nativescript-dev-typescript": "~0.7.0",
-    "node-sass": "^4.9.0",
-    "sass-loader": "^7.0.1",
-    "ts-jest": "^23.0.0",
-    "typescript": "^3.0.1",
-    "vue-template-compiler": "^2.5.17"
-  },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ]
+	"name": "ts-vue-app",
+	"version": "0.1.0",
+	"private": true,
+	"nativescript": {
+		"id": "org.nativescript.TsApp",
+		"tns-android": {
+			"version": "4.2.0"
+		},
+		"tns-ios": {
+			"version": "4.2.0"
+		}
+	},
+	"scripts": {
+		"serve": "vue-cli-service serve",
+		"build:ios": "BUILD_ENV=production PLATFORM=ios vue-cli-service build",
+		"dev:ios": "BUILD_ENV=development PLATFORM=ios vue-cli-service build",
+		"dev:android": "BUILD_ENV=development PLATFORM=android vue-cli-service build",
+		"lint": "vue-cli-service lint",
+		"lint:fix": "node_modules/.bin/tslint --project tsconfig.json --fix",
+		"lint:check": "node_modules/.bin/tslint-config-prettier-check ./tslint.json",
+		"prettier": "prettier --write \"{,!(node_modules|dist|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\"",
+		"pre-commit": "yarn lint:fix && yarn prettier",
+		"test:unit": "vue-cli-service test:unit",
+		"test:e2e": "vue-cli-service test:e2e"
+	},
+	"dependencies": {
+		"nativescript-theme-core": "~1.0.4",
+		"tns-core-modules": "~4.2.0",
+		"vue": "^2.5.17",
+		"vue-class-component": "^6.0.0",
+		"vue-property-decorator": "^7.0.0",
+		"vue-router": "^3.0.1",
+		"vuex": "^3.0.1"
+	},
+	"devDependencies": {
+		"@types/jest": "^23.1.4",
+		"@vue/cli-plugin-babel": "^3.0.0",
+		"@vue/cli-plugin-e2e-nightwatch": "^3.0.0",
+		"@vue/cli-plugin-typescript": "^3.0.0",
+		"@vue/cli-plugin-unit-jest": "^3.0.0",
+		"@vue/cli-service": "^3.0.0",
+		"@vue/test-utils": "^1.0.0-beta.20",
+		"babel-core": "7.0.0-bridge.0",
+		"nativescript-dev-typescript": "~0.7.0",
+		"nativescript-vue-externals": "^0.2.0",
+		"nativescript-vue-target": "^0.1.0",
+		"node-sass": "^4.9.0",
+		"sass-loader": "^7.0.1",
+		"ts-jest": "^23.0.0",
+		"tslint-config-prettier": "^1.15.0",
+		"typescript": "^3.0.1",
+		"vue-template-compiler": "^2.5.17",
+		"webpack-node-externals": "^1.7.2",
+		"webpack-synchronizable-shell-plugin": "^0.0.7",
+		"winston-color": "^1.0.0"
+	},
+	"browserslist": [
+		"> 1%",
+		"last 2 versions",
+		"not ie <= 8"
+	]
 }
