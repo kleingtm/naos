@@ -1,8 +1,7 @@
 const path = require(`path`);
 const winston = require(`winston-color`);
 
-const MiniCssExtractPlugin = require(`mini-css-extract-plugin`);
-const WebpackSynchronizableShellPlugin = require(`webpack-synchronizable-shell-plugin`);
+const WebpackSynchronizableShellPlugin = require('webpack-synchronizable-shell-plugin');
 const NativeScriptVueExternals = require(`nativescript-vue-externals`);
 const WebpackNodeExternals = require(`webpack-node-externals`);
 const NativeScriptVueTarget = require(`nativescript-vue-target`);
@@ -19,6 +18,18 @@ module.exports = {
     },
 
     productionSourceMap: !isProd,
+
+    configureWebpack: { // basic setup for adding config -- not editing
+        plugins: [
+            // Execute post-build scripts with specific arguments
+            new WebpackSynchronizableShellPlugin({
+                onBuildEnd: {
+                    scripts: [`node launch.js`],
+                    blocking: false,
+                },
+            })
+        ]
+    },
 
     chainWebpack: config => {
 

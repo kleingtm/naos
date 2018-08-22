@@ -20,7 +20,7 @@
 		"lint:fix": "node_modules/.bin/tslint --project tsconfig.json --fix",
 		"lint:check": "node_modules/.bin/tslint-config-prettier-check ./tslint.json",
 		"prettier": "prettier --write \"{,!(node_modules|dist|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\"",
-		"pre-commit": "yarn lint:fix && yarn prettier",
+		"pre-commit": "npm run lint:fix && npm run prettier",
 		"test:unit": "vue-cli-service test:unit",
 		"test:e2e": "vue-cli-service test:e2e"
 	},
@@ -47,6 +47,7 @@
 		"nativescript-vue-target": "^0.1.0",
 		"node-sass": "^4.9.0",
 		"sass-loader": "^7.0.1",
+		"shelljs": "^0.8.2",
 		"ts-jest": "^23.0.0",
 		"tslint-config-prettier": "^1.15.0",
 		"typescript": "^3.0.1",
