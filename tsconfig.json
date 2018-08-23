@@ -18,15 +18,7 @@
         ],
         "paths": {
             "@/*": [
-                "src/*",
-                "app/*"
-            ],
-            "*": [
-                "./node_modules/tns-core-modules/*",
-                "./node_modules/*"
-            ],
-            "~/*": [
-                "app/*"
+                "src/*"
             ]
         },
         "lib": [
@@ -37,15 +29,14 @@
             "es6"
         ]
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue",
-        "tests/**/*.ts",
-        "tests/**/*.tsx"
-    ],
+//    "include": [
+//        "src/**/*.ts",
+//        "src/**/*.tsx",
+//        "src/**/*.vue",
+//        "tests/**/*.ts",
+//        "tests/**/*.tsx"
+//    ],
     "exclude": [
-        "node_modules",
-        "platforms"
+        "node_modules"
     ]
 }

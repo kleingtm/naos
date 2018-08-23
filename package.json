@@ -12,12 +12,12 @@
 		}
 	},
 	"scripts": {
-		"serve": "vue-cli-service serve",
+		"serve": "IS_NOT_NS=true vue-cli-service serve",
 		"build:ios": "PLATFORM=ios vue-cli-service build",
-		"debug:ios": "TNS_CMD=debug PLATFORM=ios shx rm -rf dist && vue-cli-service $NODE_DEBUG_OPTION build --mode development",
+		"debug:ios": "TNS_CMD=debug PLATFORM=ios shx rm -rf dist && vue-cli-service build --mode development",
 		"debug:android": "PLATFORM=android vue-cli-service build",
-		"watch:ios": "PLATFORM=ios TNS=watch shx rm -rf dist && vue-cli-service $NODE_DEBUG_OPTION build --mode development",
-		"inspect": "PLATFORM=ios vue inspect",
+		"dev:ios": "shx rm -rf dist && PLATFORM=ios TNS_CMD=run vue-cli-service build $NODE_DEBUG_OPTION --mode development",
+		"inspect": "PLATFORM=ios TNS_CMD=watch vue inspect",
 		"launch": "node $NODE_DEBUG_OPTION utils/launch.js",
 		"lint": "vue-cli-service lint",
 		"lint:fix": "node_modules/.bin/tslint --project tsconfig.json --fix",
@@ -27,19 +27,23 @@
 		"postinstall": "node -e \"process.env.npm_execpath.includes('yarn') || require('child_process').execSync('rm -rf package-lock.json', {stdio:[0,1,2]});\"",
 		"test:unit": "vue-cli-service test:unit",
 		"test:e2e": "vue-cli-service test:e2e",
-		"clean": "rm -rf dist node_modules package-lock.json yarn.lock"
+		"clean": "shx rm -rf dist node_modules package-lock.json yarn.lock",
+		"test": "PLATFORM=ios TNS_CMD=watch node $NODE_DEBUG_OPTION test.js"
 	},
 	"dependencies": {
 		"nativescript-theme-core": "~1.0.4",
+		"nativescript-vue": "1.3.1",
 		"tns-core-modules": "~4.2.0",
 		"vue": "^2.5.17",
 		"vue-class-component": "^6.0.0",
+		"vue-loader": "^15.4.0",
 		"vue-property-decorator": "^7.0.0",
 		"vue-router": "^3.0.1",
 		"vuex": "^3.0.1"
 	},
 	"devDependencies": {
 		"@types/jest": "^23.1.4",
+		"@types/vue": "^2.0.0",
 		"@vue/cli-plugin-babel": "^3.0.0",
 		"@vue/cli-plugin-e2e-nightwatch": "^3.0.0",
 		"@vue/cli-plugin-typescript": "^3.0.0",
@@ -47,6 +51,7 @@
 		"@vue/cli-service": "^3.0.0",
 		"@vue/test-utils": "^1.0.0-beta.20",
 		"babel-core": "7.0.0-bridge.0",
+		"css-loader": "^1.0.0",
 		"cssnano": "^4.0.5",
 		"nativescript-vue-externals": "^0.2.0",
 		"nativescript-vue-loader": "^0.1.5",
@@ -62,7 +67,6 @@
 		"tslint-config-prettier": "^1.15.0",
 		"typescript": "^3.0.1",
 		"vue-template-compiler": "^2.5.17",
-		"webpack": "^4.17.1",
 		"webpack-node-externals": "^1.7.2",
 		"webpack-synchronizable-shell-plugin": "^0.0.7",
 		"winston-color": "^1.0.0"

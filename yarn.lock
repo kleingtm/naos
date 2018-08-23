@@ -607,6 +607,12 @@
   version "0.0.30"
   resolved "https://registry.yarnpkg.com/@types/strip-json-comments/-/strip-json-comments-0.0.30.tgz#9aa30c04db212a9a0649d6ae6fd50accc40748a1"
 
+"@types/vue@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@types/vue/-/vue-2.0.0.tgz#ec77b3d89591deb9ca5cb052368aa9c32be088e7"
+  dependencies:
+    vue "*"
+
 "@vue/babel-preset-app@^3.0.1":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@vue/babel-preset-app/-/babel-preset-app-3.0.1.tgz#24188938e93f259f7141a6a1190da9c511d123d8"
@@ -2778,8 +2784,8 @@ ejs@^2.5.7:
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.6.1.tgz#498ec0d495655abc6f23cd61868d926464071aa0"
 
 electron-to-chromium@^1.3.47, electron-to-chromium@^1.3.57:
-  version "1.3.60"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.60.tgz#85a28db8484f3dd84de46bdcb7aa829e2f016423"
+  version "1.3.61"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.61.tgz#a8ac295b28d0f03d85e37326fd16b6b6b17a1795"
 
 elliptic@^6.0.0:
   version "6.4.1"
@@ -5544,6 +5550,10 @@ nativescript-vue-template-compiler@^1.3.1:
     de-indent "^1.0.2"
     he "^1.1.0"
 
+nativescript-vue@1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/nativescript-vue/-/nativescript-vue-1.3.1.tgz#ab156e9ab6fa23f1172f98d0e2decf7247b50c7c"
+
 natural-compare@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/natural-compare/-/natural-compare-1.4.0.tgz#4abebfeed7541f2c27acfb29bdbbd15c8d5ba4f7"
@@ -8288,7 +8298,7 @@ vue-jest@^2.6.0:
     tsconfig "^7.0.0"
     vue-template-es2015-compiler "^1.6.0"
 
-vue-loader@^15.3.0:
+vue-loader@^15.3.0, vue-loader@^15.4.0:
   version "15.4.0"
   resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-15.4.0.tgz#8c90f94ece61c6b4707e87b4a58617f97faa125b"
   dependencies:
@@ -8333,7 +8343,7 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.5.17:
+vue@*, vue@^2.5.17:
   version "2.5.17"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.17.tgz#0f8789ad718be68ca1872629832ed533589c6ada"
 
@@ -8485,7 +8495,7 @@ webpack-synchronizable-shell-plugin@^0.0.7:
   dependencies:
     babel-polyfill "^6.26.0"
 
-webpack@^4.15.1, webpack@^4.17.1:
+webpack@^4.15.1:
   version "4.17.1"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-4.17.1.tgz#0f026e3d823f3fc604f811ed3ea8f0d9b267fb1e"
   dependencies:
