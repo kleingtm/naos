@@ -19,177 +19,186 @@ winston.info(`PLATFORM: ${process.env.PLATFORM}`);
 const platform = `${process.env.PLATFORM ? '.' + process.env.PLATFORM : ''}`;
 
 module.exports = {
-    outputDir: path.resolve(__dirname, `./dist/app`),
+	outputDir: path.resolve(__dirname, `./dist/app`),
 
-    css: {
-        extract: true
-    },
+	css: {
+		extract: true
+	},
 
-    productionSourceMap: !isProd,
+	productionSourceMap: !isProd,
 
-    configureWebpack: { // basic setup for adding config -- not editing
-        plugins: [
-            // Execute post-build scripts with specific arguments
-            new WebpackSynchronizableShellPlugin({
-                onBuildEnd: isDev ? {
-                    // only runs once
-                    scripts: [`node ${path.resolve('utils/tns-install.js')}`],
-                    blocking: true,
-                    parallel: false
-                } : {},
-                onBuildExit: isDev ? {
-                    // runs after each rebuild
-                    scripts: [`node ${path.resolve('utils/launch.js')}`],
-                    blocking: false,
-                    parallel: false
-                } : {}
-            }),
+	configureWebpack: {
+		// basic setup for adding config -- not editing
+		plugins: [
+			// Execute post-build scripts with specific arguments
+			new WebpackSynchronizableShellPlugin({
+				onBuildEnd: isDev
+					? {
+							// only runs once
+							scripts: [`node ${path.resolve('utils/tns-install.js')}`],
+							blocking: true,
+							parallel: false
+					  }
+					: {},
+				onBuildExit: isDev
+					? {
+							// runs after each rebuild
+							scripts: [`node ${path.resolve('utils/launch.js')}`],
+							blocking: false,
+							parallel: false
+					  }
+					: {}
+			}),
 
-            new webpack.LoaderOptionsPlugin({
-                options: {}
-            }),
+			new webpack.LoaderOptionsPlugin({
+				options: {}
+			}),
 
-            // Optimize CSS output
-            new OptimizeCssAssetsPlugin({
-                cssProcessor: require('cssnano'),
-                cssProcessorOptions: {
-                    discardComments: {removeAll: true},
-                    normalizeUrl: false
-                },
-                canPrint: false,
-            })
-        ]
-    },
+			// Optimize CSS output
+			new OptimizeCssAssetsPlugin({
+				cssProcessor: require('cssnano'),
+				cssProcessorOptions: {
+					discardComments: { removeAll: true },
+					normalizeUrl: false
+				},
+				canPrint: false
+			})
+		]
+	},
 
-    chainWebpack: config => {
+	chainWebpack: config => {
+		winston.info(`Bundling webpack application for ${platform}...`);
 
-        winston.info(`Bundling webpack application for ${platform}...`);
+		config.watch(isDev);
 
-        config.watch(isDev);
+		if (!process.env.IS_NOT_NS) {
+			// NativeScript settings that break the original vue-cli build:
+			config.resolve.alias.set(`vue$`, `nativescript-vue`);
+			//config.target(NativeScriptVueTarget);
 
-        if (!process.env.IS_NOT_NS) {
+			// let cssLoader;
+			// //config.module.rule('css').oneOf('vue').resourceQuery(/inline/)
+			// // .use('url')
+			// //       .tap(options => {
+			// //          cssLoader = options;
+			// //       });
 
-            // NativeScript settings that break the original vue-cli build:
-            config.resolve.alias.set(`vue$`, `nativescript-vue`);
-            //config.target(NativeScriptVueTarget);
+			config.plugins.delete('vue-loader');
 
-            // let cssLoader;
-            // //config.module.rule('css').oneOf('vue').resourceQuery(/inline/)
-            // // .use('url')
-            // //       .tap(options => {
-            // //          cssLoader = options;
-            // //       });
+			config.module
+				.rule('vue')
+				.use('vue-loader')
+				.loader('ns-vue-loader');
+			// .tap()
 
-            config.plugins.delete('vue-loader');
+			config.module
+				.rule('ts')
+				.use('ts-loader')
+				.tap(object => {
+					return Object.assign(object, { appendTsSuffixTo: [/\.vue$/] });
+				});
+			config.module
+				.rule('tsx')
+				.use('ts-loader')
+				.tap(object => {
+					return Object.assign(object, { appendTsxSuffixTo: [/\.vue$/] });
+				});
 
-            config.module.rule('vue')
-            .use('vue-loader')
-            .loader('ns-vue-loader');
-            // .tap()
+			// config.plugin('vue-loader').clear();
+			// .tap(options => {
+			//     console.log(options);
+			//     scssLoader = options;
+			// });
 
+			// let scssLoader;
+			// config.module.rule('scss').oneOf('vue').resourceQuery(/\?vue/).use('css-loader')
+			// .tap(options => {
+			//     console.log(options);
+			//     scssLoader = options;
+			// });
 
-            config.module.rule('ts').use('ts-loader')
-            .tap(object => {
-                return Object.assign(object, {appendTsSuffixTo: [/\.vue$/]});
-            });
-            config.module.rule('tsx').use('ts-loader')
-            .tap(object => {
-                return Object.assign(object, {appendTsxSuffixTo: [/\.vue$/]});
-            });
+			// console.log(`cssLoader: ${JSON.stringify(cssLoader)}`);
+			// console.log(`scssLoader: ${JSON.stringify(scssLoader)}`);
 
-            // config.plugin('vue-loader').clear();
-            // .tap(options => {
-            //     console.log(options);
-            //     scssLoader = options;
-            // });
+			// config.module.rule('vue')
+			// .use('ns-vue-loader')
+			// .tap(() => {
+			//     return {
+			//         loaders: {
+			//             css: cssLoader,
+			//             scss: scssLoader,
+			//         },
+			//     };
+			// });
 
-            // let scssLoader;
-            // config.module.rule('scss').oneOf('vue').resourceQuery(/\?vue/).use('css-loader')
-            // .tap(options => {
-            //     console.log(options);
-            //     scssLoader = options;
-            // });
+			config.output.filename(`app${platform}.js`);
+			config.plugin('extract-css').tap(() => {
+				return [
+					{
+						filename: `app${platform}.css`,
+						chunkFilename: `app${platform}.[contenthash:8].css`
+					}
+				];
+			});
 
-            // console.log(`cssLoader: ${JSON.stringify(cssLoader)}`);
-            // console.log(`scssLoader: ${JSON.stringify(scssLoader)}`);
+			/* configuration for debug vs not */
+			config.devtool(
+				process.env.TNS_CMD === 'debug' ? `inline-source-map` : false
+			);
+			if (!(process.env.TNS_CMD === 'debug')) {
+				config.mode(`production`);
+			}
 
-            // config.module.rule('vue')
-            // .use('ns-vue-loader')
-            // .tap(() => {
-            //     return {
-            //         loaders: {
-            //             css: cssLoader,
-            //             scss: scssLoader,
-            //         },
-            //     };
-            // });
+			config.module
+				.rule('images')
+				.use('url-loader')
+				.tap(() => {
+					return {
+						limit: 4096,
+						fallback: {
+							loader: 'file-loader',
+							options: {
+								name: 'images/[name].[ext]'
+							}
+						}
+					};
+				});
 
-            config.output.filename(`app${platform}.js`);
-            config.plugin('extract-css').tap(() => {
-                return [
-                    {
-                        filename: `app${platform}.css`,
-                        chunkFilename: `app${platform}.[contenthash:8].css`
-                    }
-                ];
-            });
+			config.module
+				.rule('svg')
+				.use('file-loader')
+				.tap(() => {
+					return {
+						name: 'images/[name].[ext]'
+					};
+				});
 
+			config.plugin('copy').tap(options => {
+				try {
+					const ignore = options[0][0].ignore;
+					return [
+						[
+							{
+								from: path.join(__dirname, `public`),
+								to: path.join(__dirname, `dist`),
+								ignore: ignore
+							}
+						]
+					];
+				} catch (e) {
+					console.log(`copy options error`);
+				}
+			});
 
-            /* configuration for debug vs not */
-            config.devtool(process.env.TNS_CMD === 'debug' ? `inline-source-map` : false);
-            if (!(process.env.TNS_CMD === 'debug')) {
-                config.mode(`production`);
-            }
-
-            config.module.rule('images')
-            .use('url-loader')
-            .tap(() => {
-                return {
-                    limit: 4096,
-                    fallback: {
-                        loader: "file-loader",
-                        options: {
-                            "name": "images/[name].[ext]"
-                        }
-                    }
-                };
-            });
-
-            config.module.rule('svg')
-            .use('file-loader')
-            .tap(() => {
-                return {
-                    name: "images/[name].[ext]"
-                };
-            });
-
-            config.plugin('copy')
-            .tap(options => {
-                try {
-                    const ignore = options[0][0].ignore;
-                    return [
-                        [
-                            {
-                                from: path.join(__dirname, `public`),
-                                to: path.join(__dirname, `dist`),
-                                ignore: ignore
-                            }
-                        ]
-                    ];
-                }
-                catch (e) {
-                    console.log(`copy options error`)
-                }
-            });
-
-            config.externals([
-                WebpackNodeExternals({
-                    // whitelist everything that does not have tns-core-modules in its name
-                    whitelist: [((moduleName) => (moduleName.indexOf('tns-core-modules') === -1))]
-                }),
-                NativeScriptVueExternals
-            ])
-        }
-    } // end chainWebpack
-
+			config.externals([
+				WebpackNodeExternals({
+					// whitelist everything that does not have tns-core-modules in its name
+					whitelist: [
+						moduleName => moduleName.indexOf('tns-core-modules') === -1
+					]
+				}),
+				NativeScriptVueExternals
+			]);
+		}
+	} // end chainWebpack
 };

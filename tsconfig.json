@@ -1,42 +1,29 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
-        "strict": true,
-        "jsx": "preserve",
-        "importHelpers": true,
-        "moduleResolution": "node",
-        "experimentalDecorators": true,
-        "esModuleInterop": true,
-        "allowSyntheticDefaultImports": true,
-        "baseUrl": ".",
-        "noEmitHelpers": true,
-        "noEmitOnError": true,
-        "types": [
-            "node",
-            "jest"
-        ],
-        "paths": {
-            "@/*": [
-                "src/*"
-            ]
-        },
-        "lib": [
-            "esnext",
-            "dom",
-            "dom.iterable",
-            "scripthost",
-            "es6"
-        ]
-    },
-//    "include": [
-//        "src/**/*.ts",
-//        "src/**/*.tsx",
-//        "src/**/*.vue",
-//        "tests/**/*.ts",
-//        "tests/**/*.tsx"
-//    ],
-    "exclude": [
-        "node_modules"
-    ]
+	"compilerOptions": {
+		"target": "esnext",
+		"module": "esnext",
+		"strict": true,
+		"jsx": "preserve",
+		"importHelpers": true,
+		"moduleResolution": "node",
+		"experimentalDecorators": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"baseUrl": ".",
+		"noEmitHelpers": true,
+		"noEmitOnError": true,
+		"types": ["node", "jest"],
+		"paths": {
+			"@/*": ["src/*"]
+		},
+		"lib": ["esnext", "dom", "dom.iterable", "scripthost", "es6"]
+	},
+	//    "include": [
+	//        "src/**/*.ts",
+	//        "src/**/*.tsx",
+	//        "src/**/*.vue",
+	//        "tests/**/*.ts",
+	//        "tests/**/*.tsx"
+	//    ],
+	"exclude": ["node_modules"]
 }

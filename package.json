@@ -22,7 +22,7 @@
 		"lint": "vue-cli-service lint",
 		"lint:fix": "node_modules/.bin/tslint --project tsconfig.json --fix",
 		"lint:check": "node_modules/.bin/tslint-config-prettier-check ./tslint.json",
-		"prettier": "prettier --write \"{,!(node_modules|dist|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\"",
+		"prettify": "prettier --write \"{,!(node_modules|dist|build|coverage)/**/}*.{js,jsx,ts,tsx,json}\"",
 		"pre-commit": "yarn lint:fix && yarn prettier",
 		"postinstall": "node -e \"process.env.npm_execpath.includes('yarn') || require('child_process').execSync('rm -rf package-lock.json', {stdio:[0,1,2]});\"",
 		"test:unit": "vue-cli-service test:unit",
