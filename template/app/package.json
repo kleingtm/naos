@@ -3,6 +3,6 @@
     "v8Flags": "--expose_gc"
   },
   "main": "app.js",
-  "name": "naos",
+  "name": "vuecli-ns-template",
   "version": "1.0.0"
 }

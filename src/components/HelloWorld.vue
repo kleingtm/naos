@@ -16,21 +16,21 @@
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        surprise: false,
-      };
-    },
-  };
+export default {
+  data() {
+    return {
+      surprise: false
+    };
+  }
+};
 </script>
 
 <style scoped>
-  .hello-world {
-    margin: 20;
-  }
+.hello-world {
+  margin: 20;
+}
 
-  Label {
-    color: red;
-  }
+label {
+  color: red;
+}
 </style>
