@@ -6,3 +6,5 @@ node_modules
 
 # NativeScript application
 /dist
+
+yarn-error.log
