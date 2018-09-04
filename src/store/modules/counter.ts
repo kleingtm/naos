@@ -1,16 +1,16 @@
-export interface CounterState {
+export interface ICounterState {
   count: number;
 }
 
-const state: CounterState = {
+const state: ICounterState = {
   count: 0
 };
 
 const mutations = {
-  decrement(state: CounterState) {
+  decrement(state: ICounterState) {
     state.count--;
   },
-  increment(state: CounterState) {
+  increment(state: ICounterState) {
     state.count++;
   }
 };

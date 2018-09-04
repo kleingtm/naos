@@ -1,15 +1,16 @@
 {
-  "name": "vuecli-ns-template",
-  "description": "A native application built with NativeScript-Vue",
+  "name": "naos",
+  "description": "A better Stellar wallet",
   "license": "MIT",
-  "readme": "NativeScript-Vue Application",
+  "readme": "Naos",
   "nativescript": {
-    "id": "org.nativescript.application"
+    "id": "org.nativescript.naos"
   },
   "dependencies": {
     "nativescript-theme-core": "^1.0.4",
     "nativescript-vue": "^1.3.1",
-    "tns-core-modules": "~3.4.1"
+    "tns-core-modules": "~3.4.1",
+    "nativescript-fingerprint-auth": "^6.1.0"
   },
   "devDependencies": {
     "babel-traverse": "6.26.0",

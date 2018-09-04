@@ -1,0 +1,47 @@
+// Import the theme’s variables. If you’re using a color scheme
+// other than “light”, switch the path to the alternative scheme,
+// for example '~nativescript-theme-core/scss/dark'.
+@import '../../node_modules/nativescript-theme-core/scss/light';
+@import '../../node_modules/nativescript-theme-core/scss/index';
+
+// Customize any of the theme’s variables here, for instance $btn-color: red;
+
+@import '_variables';
+@import 'icons';
+
+
+ActionBar .action-image {
+  height: 40;
+}
+
+label {
+  font-family: 'OpenSans-Regular', sans-serif;
+}
+
+.bold {
+  color: #000000;
+}
+
+.btn-primary {
+  background-color: $color-stellar;
+  border-radius: 5;
+  font-size: 20;
+  font-weight: 600;
+}
+
+.input {
+  font-size: 18;
+  placeholder-color: #A8A8A8;
+}
+
+.input-field .input {
+  font-size: 54;
+}
+
+.header + .subtitle {
+  color: $color-subtitle;
+}
+.header {
+  font-family: 'Raleway-Regular', sans-serif;
+  color: $color-primary;
+}

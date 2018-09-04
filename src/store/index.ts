@@ -2,19 +2,22 @@
 import Vue from "nativescript-vue";
 import Vuex from "vuex";
 
-import counter from "./modules/counter";
+import Counter, { ICounterState } from "./modules/counter";
+import Auth, { IAuth } from "./modules/auth";
 
 Vue.use(Vuex);
 
 const debug = process.env.NODE_ENV !== "production";
 
 interface RootState {
-  version: string;
+  Auth: IAuth;
+  Counter: ICounterState;
 }
 
 const store = new Vuex.Store<RootState>({
   modules: {
-    counter
+    counter: Counter,
+    auth: Auth
   },
   strict: debug
 });
