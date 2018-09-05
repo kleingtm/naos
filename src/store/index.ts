@@ -16,8 +16,8 @@ interface RootState {
 
 const store = new Vuex.Store<RootState>({
   modules: {
-    counter: Counter,
-    auth: Auth
+    Counter: Counter,
+    Auth: Auth
   },
   strict: debug
 });

@@ -1,3 +1,4 @@
+// @ts-ignore
 import Vue, { VNode } from "nativescript-vue";
 
 declare global {
