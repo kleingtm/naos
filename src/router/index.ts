@@ -25,12 +25,19 @@ const router = new VueRouter({
     pageRouting: true,
     routes: [
         {
-            path: "/",
+            path: "/home",
             component: Home,
             meta: {
                 title: "Home",
                 requiresAuth: true
             }
+        },
+        {
+            path: '/hello',
+            component: NewUser,
+            meta: {
+                title: 'Hello World',
+            },
         },
         {
             path: "/login",
@@ -40,16 +47,16 @@ const router = new VueRouter({
                 requiresAuth: false
             }
         },
+        // {
+        //     path: "/new-user",
+        //     component: NewUser,
+        //     meta: {
+        //         title: "Welcome",
+        //         requiresAuth: false
+        //     }
+        // },
         {
-            path: "/new-user",
-            component: NewUser,
-            meta: {
-                title: "Welcome",
-                requiresAuth: false
-            }
-        },
-        {
-            path: "/Counter",
+            path: "/counter",
             component: Counter,
             meta: {
                 title: "Counter",
@@ -129,5 +136,5 @@ const router = new VueRouter({
 //     // router.replace("/login"); // on launch, go to login
 // }
 // requireLogin("this is a string"); // require login on launch
-router.replace('/login');
+router.replace('/home');
 export default router;

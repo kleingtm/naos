@@ -22,10 +22,10 @@ import { mapActions } from "vuex";
 export default {
   computed: {
     message() {
-      return this.$store.state.counter.count.toString();
+      return this.$store.state.Counter.count.toString();
     },
     surprise() {
-      return this.$store.state.counter.count >= 5;
+      return this.$store.state.Counter.count >= 5;
     }
   },
   methods: mapActions(["decrement", "increment"])

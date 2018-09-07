@@ -58,7 +58,7 @@ const config = (platform, launchArgs) => {
 
         // Copy src/assets/**/* to dist/
         new CopyWebpackPlugin([
-            {from: 'assets', context: 'src'},
+            {from: 'assets', context: 'src', ignore: '**/*.psd'},
         ]),
 
         // Execute post-build scripts with specific arguments
@@ -119,7 +119,7 @@ const config = (platform, launchArgs) => {
                         {
                             loader: 'ts-loader',
                             options: {
-                                transpileOnly: true,
+                                transpileOnly: false,
                                 appendTsSuffixTo: [
                                     '\\.vue$'
                                 ],

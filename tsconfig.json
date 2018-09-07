@@ -1,22 +1,26 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "esnext",
+    "module": "commonjs",
     "strict": true,
-    "jsx": "preserve",
+    "noEmitOnError": true,
+    "noEmitHelpers": true,
     "importHelpers": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "baseUrl": ".",
+    "noImplicitAny": false,
     "types": [
       "node",
       "jest"
     ],
     "paths": {
       "@/*": [
-        "src/*"
+        "src/*",
+        "./node_modules/tns-core-modules/*",
+        "./node_modules/*"
       ]
     },
     "lib": [
@@ -34,6 +38,8 @@
     "tests/**/*.tsx"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "platforms",
+    "e2e"
   ]
 }
