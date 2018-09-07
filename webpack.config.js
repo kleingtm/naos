@@ -7,194 +7,212 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const WebpackSynchronizableShellPlugin = require('webpack-synchronizable-shell-plugin');
 const NativeScriptVueExternals = require('nativescript-vue-externals');
 const NativeScriptVueTarget = require('nativescript-vue-target');
+const WebpackNodeExternals = require('webpack-node-externals');
 
 // Prepare NativeScript application from template (if necessary)
 require('./prepare')();
 
+
 // Generate platform-specific webpack configuration
 const config = (platform, launchArgs) => {
 
-    const command = launchArgs.split(' ')[0];
-    const isDebug = command !== 'build';
+	const command = launchArgs.split(' ')[0];
+	const isDebug = command !== 'build';
 
-    winston.info(`Bundling application for ${platform}...`);
+	winston.info(`Bundling application for ${platform}...`);
 
-    // CSS / SCSS style extraction loaders
-    const cssLoader = ExtractTextPlugin.extract({
-        use: [
-            {
-                loader: 'css-loader',
-                options: {url: false},
-            },
-        ],
-    });
-    const scssLoader = ExtractTextPlugin.extract({
-        use: [
-            {
-                loader: 'css-loader',
-                options: {
-                    url: false,
-                    includePaths: [path.resolve(__dirname, 'node_modules')],
-                },
-            },
-            'sass-loader',
-        ],
-    });
+	// CSS / SCSS style extraction loaders
+	const cssLoader = ExtractTextPlugin.extract({
+		use: [
+			{
+				loader: 'css-loader',
+				options: {url: false},
+			},
+		],
+	});
+	const scssLoader = ExtractTextPlugin.extract({
+		use: [
+			{
+				loader: 'css-loader',
+				options: {
+					url: false,
+					includePaths: [path.resolve(__dirname, 'node_modules')],
+				},
+			},
+			'sass-loader',
+		],
+	});
 
-    const plugins = [
+	const plugins = [
 
-        // Extract CSS to separate file
-        new ExtractTextPlugin({filename: `app.${platform}.css`}),
+		// Extract CSS to separate file
+		new ExtractTextPlugin({filename: `app.${platform}.css`}),
 
-        // Optimize CSS output
-        new OptimizeCssAssetsPlugin({
-            cssProcessor: require('cssnano'),
-            cssProcessorOptions: {
-                discardComments: { removeAll: true },
-                normalizeUrl: false
-            },
-            canPrint: false,
-        }),
+		// Optimize CSS output
+		new OptimizeCssAssetsPlugin({
+			cssProcessor: require('cssnano'),
+			cssProcessorOptions: {
+				discardComments: { removeAll: true },
+				normalizeUrl: false
+			},
+			canPrint: false,
+		}),
 
-        // Copy src/assets/**/* to dist/
-        new CopyWebpackPlugin([
-            {from: 'assets', context: 'src', ignore: '**/*.psd'},
-        ]),
+		// Copy src/assets/**/* to dist/
+		new CopyWebpackPlugin([
+			{from: 'assets', context: 'src', ignore: '**/*.psd'},
+		]),
 
-        // Execute post-build scripts with specific arguments
-        new WebpackSynchronizableShellPlugin({
-            onBuildEnd: {
-                scripts: [
-                    ... launchArgs ? [`node launch.js ${launchArgs}`] : [],
-                ],
-                blocking: false,
-            },
-        }),
+		// new FriendlyErrorsPlugin({
+		// 	onErrors: function (severity, errors) {
+		// 		buildError = true;
+		// 		console.error(severity);
+		// 		console.error(errors);
+		// 		process.exit(1);
+		// 	},
+		// 	//clearConsole: true,
+		// }),
 
-    ];
+		// Execute post-build scripts with specific arguments
+		new WebpackSynchronizableShellPlugin({
+			onBuildEnd: {
+				scripts: [
+					... launchArgs ? [`node launch.js ${launchArgs}`] : [],
+				],
+				blocking: false,
+			}
+		}),
 
-    if (!isDebug) {
-        // Minify JavaScript code
-        plugins.push(new webpack.optimize.UglifyJsPlugin({
-            compress: {warnings: false},
-            output: {comments: false},
-        }))
-    }
+	];
 
-    return {
+	if (!isDebug) {
+		// Minify JavaScript code
+		plugins.push(new webpack.optimize.UglifyJsPlugin({
+			compress: {warnings: false},
+			output: {comments: false},
+		}))
+	}
 
-        target: NativeScriptVueTarget,
+	return {
 
-        entry: path.resolve(__dirname, './src/main.ts'),
+		target: NativeScriptVueTarget,
 
-        output: {
-            path: path.resolve(__dirname, './dist/app'),
-            filename: `app.${platform}.js`,
-        },
+		entry: path.resolve(__dirname, './src/main.ts'),
 
-        module: {
-            rules: [
-                {
-                    test: /\.js$/,
-                    exclude: /(node_modules)/,
-                    loader: 'babel-loader',
-                },
+		output: {
+			path: path.resolve(__dirname, './dist/app'),
+			filename: `app.${platform}.js`,
+		},
 
-                {
-                    test: /\.ts$/,
-                    use: [
-                        /* config.module.rule('ts').use('cache-loader') */
-                        {
-                            loader: 'cache-loader',
-                            options: {
-                                cacheDirectory: path.resolve('./node_modules/.cache/ts-loader'),
-                                cacheIdentifier: '75e335a3'
-                            }
-                        },
-                        /* config.module.rule('ts').use('babel-loader') */
-                        {
-                            loader: 'babel-loader'
-                        },
-                        /* config.module.rule('ts').use('ts-loader') */
-                        {
-                            loader: 'ts-loader',
-                            options: {
-                                transpileOnly: false,
-                                appendTsSuffixTo: [
-                                    '\\.vue$'
-                                ],
-                                happyPackMode: false
-                            }
-                        }
-                    ]
-                },
+		module: {
+			rules: [
+				{
+					test: /\.js$/,
+					exclude: /(node_modules)/,
+					loader: 'babel-loader',
+				},
 
-                {
-                    test: /\.css$/,
-                    use: cssLoader,
-                },
-                {
-                    test: /\.scss$/,
-                    use: scssLoader,
-                },
+				{
+					test: /\.ts$/,
+					use: [
+						/* config.module.rule('ts').use('cache-loader') */
+						{
+							loader: 'cache-loader',
+							options: {
+								cacheDirectory: path.resolve('./node_modules/.cache/ts-loader'),
+								cacheIdentifier: '75e335a3'
+							}
+						},
+						/* config.module.rule('ts').use('babel-loader') */
+						{
+							loader: 'babel-loader'
+						},
+						/* config.module.rule('ts').use('ts-loader') */
+						{
+							loader: 'ts-loader',
+							options: {
+								transpileOnly: false,
+								appendTsSuffixTo: [
+									'\\.vue$'
+								],
+								happyPackMode: false
+							}
+						}
+					]
+				},
 
-                {
-                    test: /\.vue$/,
-                    loader: 'ns-vue-loader',
-                    options: {
-                        loaders: {
-                            css: cssLoader,
-                            scss: scssLoader,
-                        },
-                    },
-                },
-            ],
-        },
+				{
+					test: /\.css$/,
+					use: cssLoader,
+				},
+				{
+					test: /\.scss$/,
+					use: scssLoader,
+				},
 
-        resolve: {
-            modules: [
-                'node_modules/tns-core-modules',
-                'node_modules',
-            ],
-            extensions: [
-                `.${platform}.css`,
-                '.css',
-                `.${platform}.scss`,
-                '.scss',
-                `.${platform}.js`,
-                '.js',
-                `.${platform}.vue`,
-                `.${platform}.ts`,
-                '.ts',
-                '.vue',
-            ],
-        },
+				{
+					test: /\.vue$/,
+					loader: 'ns-vue-loader',
+					options: {
+						loaders: {
+							css: cssLoader,
+							scss: scssLoader,
+						},
+					},
+				},
+			],
+		},
 
-        externals: NativeScriptVueExternals,
+		resolve: {
+			modules: [
+				"node_modules/tns-core-modules",
+				"node_modules"
+			],
+			extensions: [
+				`.${platform}.css`,
+				'.css',
+				`.${platform}.scss`,
+				'.scss',
+				`.${platform}.js`,
+				'.js',
+				`.${platform}.vue`,
+				`.${platform}.ts`,
+				'.ts',
+				'.vue',
+			],
+		},
 
-        plugins: plugins,
+		externals: [
+			WebpackNodeExternals({
+				// whitelist everything that does not have tns-core-modules in its name
+				whitelist: [((moduleName) => (moduleName.indexOf('tns-core-modules') === -1))]
+			}),
+			NativeScriptVueExternals
+		],
 
-        stats: 'normal',
+		plugins: plugins,
 
-        node: {
-            'http': false,
-            'timers': false,
-            'setImmediate': false,
-            'fs': 'empty',
-        },
+		stats: 'normal',
 
-    };
+		node: {
+			'http': false,
+			'timers': false,
+			'setImmediate': false,
+			'fs': 'empty',
+		},
+
+	};
 };
 
 // Determine platform(s) and action from webpack env arguments
 module.exports = env => {
-    const action = (!env || !env.tnsAction) ? 'build' : env.tnsAction;
+	const action = (!env || !env.tnsAction) ? 'build' : env.tnsAction;
 
-    if (!env || (!env.android && !env.ios)) {
-        return [config('android'), config('ios', action)];
-    }
+	if (!env || (!env.android && !env.ios)) {
+		return [config('android'), config('ios', action)];
+	}
 
-    return env.android && config('android', `${action} android`)
-        || env.ios && config('ios', `${action} ios`)
-        || {};
+	return env.android && config('android', `${action} android`)
+		|| env.ios && config('ios', `${action} ios`)
+		|| {};
 };

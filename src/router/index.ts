@@ -1,9 +1,9 @@
 // @ts-ignore
 import Vue from "nativescript-vue";
 import VueRouter from "vue-router";
-//
-// import * as app from "tns-core-modules/application";
-// import * as appSettings from "tns-core-modules/application-settings";
+
+import * as app from "tns-core-modules/application";
+//import * as appSettings from "tns-core-modules/application-settings";
 // import { FingerprintAuth } from "nativescript-fingerprint-auth";
 
 import Home from "../components/Home.vue";
@@ -11,14 +11,18 @@ import Counter from "../components/Counter.vue";
 import Login from "../components/Login.vue";
 import NewUser from "../components/NewUser.vue";
 
-// import store from "../store";
-// import {Route} from 'vue-router/types/router';
-// import {EventData} from 'tns-core-modules/ui/frame';
+import store from "../store";
+import {Route} from 'vue-router/types/router';
+import {EventData} from 'tns-core-modules/ui/frame';
 
 Vue.use(VueRouter);
 
 // attach nativescript ios / android lifecycle event handlers
-//app.on(app.resumeEvent, onAppResume);
+// app.on(app.resumeEvent, onAppResume);
+
+app.on(app.resumeEvent, ()=> {
+    console.log('um, hi');
+});
 
 const router = new VueRouter({
     // @ts-ignore
@@ -103,16 +107,16 @@ const router = new VueRouter({
 //     }
 // }
 //
-// export function onAppResume(args: EventData) {
-//     console.log("resume event!");
-//     if (args.android) {
-//         // for Android applications, args.android is an android activity class.
-//         console.log("Activity: " + args.android);
-//     } else if (args.ios) {
-//         // for iOS applications, args.ios is UIApplication.
-//         console.log("UIApplication: " + args.ios);
-//     }
-// }
+export function onAppResume(args: any) {
+    console.log("resume event!");
+    // if (args.android) {
+    //     // for Android applications, args.android is an android activity class.
+    //     console.log("Activity: " + args.android);
+    // } else if (args.ios) {
+    //     // for iOS applications, args.ios is UIApplication.
+    //     console.log("UIApplication: " + args.ios);
+    // }
+}
 //
 // export function startNewUserFlow({ next }: {next: any}) {
 //     console.log("going to set new user");
