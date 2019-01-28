@@ -1,15 +1,19 @@
+// import 'auth0-js/build/auth0.js';
+
 // @ts-ignore
 import Vue from "nativescript-vue";
-import router from "./router";
+import "./router";
 import store from "./store";
 
 import "./styles/app.android.scss";
 import "./styles/app.ios.scss";
 
+import Login from "./components/Login.vue"; // default route
+
 // Uncomment the following to see NativeScript-Vue output logs
-//Vue.config.silent = false;
+Vue.config.silent = false;
 
 new Vue({
-  router,
-  store
+  store,
+  render: h => h('frame', [h(Login)])
 }).$start();

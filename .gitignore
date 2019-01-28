@@ -4,7 +4,7 @@
 # NPM
 node_modules
 
-# NativeScript application
+## NativeScript application
 /dist
 
 yarn-error.log

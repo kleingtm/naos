@@ -2,8 +2,8 @@
 import Vue from "nativescript-vue";
 import Vuex from "vuex";
 
-import Counter, { ICounterState } from "./modules/counter";
-import Auth, { IAuth } from "./modules/auth";
+import Counter, { ICounterState } from "./modules/counter.store";
+import Auth, { IAuth } from "./modules/auth.store";
 
 Vue.use(Vuex);
 

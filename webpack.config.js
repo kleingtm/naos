@@ -78,6 +78,7 @@ const config = (platform, launchArgs) => {
 			onBuildEnd: {
 				scripts: [
 					... launchArgs ? [`node launch.js ${launchArgs}`] : [],
+					... launchArgs ? [`node launch.js ${launchArgs}`] : [],
 				],
 				blocking: false,
 			}

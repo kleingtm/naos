@@ -9,3 +9,7 @@
 
   </Page>
 </template>
+
+<script lang='ts'>
+
+</script>
