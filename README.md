@@ -1,4 +1,4 @@
-# naos
+# gregoras
 
 > A better Stellar wallet
 

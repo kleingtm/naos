@@ -4,7 +4,7 @@
 			<StackLayout class="form">
 				<StackLayout>
 					<Image src="~/images/naos-logo-3d-md.png" loadMode="async" class="logo"/>
-					<Label class="header" text="Naos" />
+					<Label class="header" text="gregoras" />
 					<!--<Label class="subtitle" text="A better Stellar wallet" />-->
 				</StackLayout>
 
@@ -47,7 +47,7 @@
 	export default {
 		data() {
 			return {
-				isLoggingIn: false, // logging in vs signing up. default to signing up
+				isLoggingIn: true, // logging in vs signing up. default to logging in
 				user: {
 					email: "",
 					password: "",
@@ -100,7 +100,7 @@
 				prompt({
 					title: "Forgot Password",
 					message:
-						"Enter the email address you used to register for Naos to reset your password.",
+						"Enter the email address you used to register for Gregoras to reset your password.",
 					inputType: "email",
 					defaultText: "",
 					okButtonText: "Ok",
@@ -132,7 +132,7 @@
 			},
 			alert(message) {
 				return alert({
-					//title: "Naos",
+					//title: "Gregoras",
 					okButtonText: "OK",
 					message: message
 				});
