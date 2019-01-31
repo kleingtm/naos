@@ -1,8 +1,8 @@
 {
-  "name": "gregoras",
+  "name": "Naos",
   "description": "A better Stellar wallet",
   "license": "MIT",
-  "readme": "gregoras",
+  "readme": "Naos",
   "nativescript": {
     "id": "com.gregoras.naos"
   },

@@ -1,5 +1,5 @@
 {
-  "name": "gregoras",
+  "name": "naos",
   "version": "1.0.0",
   "description": "A better Stellar wallet",
   "author": "Tom Kleingers <kleingtm@gmail.com>",
@@ -12,7 +12,7 @@
     "build:debug": "tns --path dist build android",
     "build:android": "npm run build -- --env.android",
     "build:ios": "npm run build -- --env.ios",
-    "debug": "webpack --watch --env.tnsAction debug",
+    "debug": "yarn clean && webpack --watch --env.tnsAction debug",
     "debug:android": "npm run debug -- --env.android",
     "debug:ios": "npm run debug -- --env.ios",
     "platform:list": "tns --path=dist platform list",

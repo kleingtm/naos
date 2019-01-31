@@ -4,7 +4,7 @@
 			<StackLayout class="form">
 				<StackLayout>
 					<Image src="~/images/naos-logo-3d-md.png" loadMode="async" class="logo"/>
-					<Label class="header" text="gregoras" />
+					<Label class="header" text="Naos" />
 					<!--<Label class="subtitle" text="A better Stellar wallet" />-->
 				</StackLayout>
 
@@ -100,7 +100,7 @@
 				prompt({
 					title: "Forgot Password",
 					message:
-						"Enter the email address you used to register for Gregoras to reset your password.",
+						"Enter the email address you used to register for Naos to reset your password.",
 					inputType: "email",
 					defaultText: "",
 					okButtonText: "Ok",
@@ -132,7 +132,7 @@
 			},
 			alert(message) {
 				return alert({
-					//title: "Gregoras",
+					//title: "Naos",
 					okButtonText: "OK",
 					message: message
 				});
@@ -159,7 +159,7 @@
 	.logo {
 		margin-top:25;
 		margin-bottom: 12;
-		height: 90;
+		height: 120;
 		font-weight: bold;
 	}
 	.header + .subtitle {

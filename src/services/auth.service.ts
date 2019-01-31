@@ -21,7 +21,7 @@ class AuthService {
 
 
   protected domain:string = `tkleingers.auth0.com`;
-  protected clientId:string = `i7YrTClQAYgQMnm0japcOWnpxdP4v1uY`; // application id. gregoras vs kleingers cap, etc
+  protected clientId:string = `i7YrTClQAYgQMnm0japcOWnpxdP4v1uY`; // application id. Naos vs kleingers cap, etc
   protected connectionName:string = `Username-Password-Authentication`; // manage.auth0.com -> dashboard -> connections -> database
   protected http = require(`tns-core-modules/http`); // you can't use request / axios. You have to use the tns-core http
 
@@ -59,7 +59,7 @@ class AuthService {
         connection: this.connectionName,
         user_metadata: {
           name: `Tom Kleingers`,
-          app: `Gregoras`
+          app: `Naos`
         }
       })
     };

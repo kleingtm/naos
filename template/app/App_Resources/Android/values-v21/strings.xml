@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Gregoras</string>
-    <string name="title_activity_kimera">Gregoras</string>
+    <string name="app_name">Naos</string>
+    <string name="title_activity_kimera">Naos</string>
     <string name="com_auth0_client_id">i7YrTClQAYgQMnm0japcOWnpxdP4v1uY</string>
     <string name="com_auth0_domain">tkleingers.auth0.com</string>
 </resources>

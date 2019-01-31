@@ -21,7 +21,7 @@ axios({
 		connection: connectionName,
 		user_metadata: {
 			name: `Tom Kleingers`,
-			app: `Gregoras`
+			app: `Naos`
 		}
 	}
 }).then(response => {
