@@ -1,6 +1,7 @@
 // Add your native dependencies here:
 
 android {
+  manifestPlaceholders = [auth0Domain: "@string/com_auth0_domain", auth0Scheme: "https"]
   defaultConfig {  
     generatedDensities = []
     applicationId = "__PACKAGE__"

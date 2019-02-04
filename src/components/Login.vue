@@ -2,27 +2,21 @@
 	<Page actionBarHidden="true">
 		<FlexboxLayout class="page">
 			<StackLayout class="form">
-				<StackLayout>
-					<Image src="~/images/naos-logo-3d-md.png" loadMode="async" class="logo"/>
-					<Label class="header" text="Naos" />
-					<!--<Label class="subtitle" text="A better Stellar wallet" />-->
-				</StackLayout>
+				<Image src="~/images/logo.png" loadMode="async" class="logo"/>
+				<Label class="header" text="Naos" />
 
 				<StackLayout class="input-field" marginBottom="25">
-					<TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none" v-model="user.email"
-					           returnKeyType="next" @returnPress="focusPassword" fontSize="18" />
+					<TextField class="input" hint="Email" keyboardType="email" autocorrect="false" autocapitalizationType="none" v-model="user.email" returnKeyType="next" @returnPress="focusPassword" fontSize="18" />
 					<StackLayout class="hr-light" />
 				</StackLayout>
 
 				<StackLayout class="input-field" marginBottom="25">
-					<TextField ref="password" class="input" hint="Password" secure="true" v-model="user.password" :returnKeyType="isLoggingIn ? 'done' : 'next'"
-					           @returnPress="focusConfirmPassword" fontSize="18" />
+					<TextField ref="password" class="input" hint="Password" secure="true" v-model="user.password" :returnKeyType="isLoggingIn ? 'done' : 'next'" @returnPress="focusConfirmPassword" fontSize="18" />
 					<StackLayout class="hr-light" />
 				</StackLayout>
 
 				<StackLayout v-show="!isLoggingIn" class="input-field">
-					<TextField ref="confirmPassword" class="input" hint="Confirm password" secure="true" v-model="user.confirmPassword" returnKeyType="done"
-					           fontSize="18" />
+					<TextField ref="confirmPassword" class="input" hint="Confirm password" secure="true" v-model="user.confirmPassword" returnKeyType="done" fontSize="18" />
 					<StackLayout class="hr-light" />
 				</StackLayout>
 
@@ -164,17 +158,17 @@
 	}
 	.header + .subtitle {
 		horizontal-align: center;
-		font-size: 16px;
+		font-size: 16;
 		font-weight: 600;
-		margin-top: 10px;
-		margin-bottom: 25px;
+		margin-top: 10;
+		margin-bottom: 25;
 		text-align: center;
 	}
 	.header {
 		horizontal-align: center;
-		font-size: 25px;
+		font-size: 25;
 		font-weight: 600;
-		margin-bottom: 25px;
+		margin-bottom: 25;
 		text-align: center;
 	}
 
